@@ -1,0 +1,236 @@
+*{
+    margin: 0;
+    padding: 0;
+    border: 0;
+    border-radius: 0;
+    box-sizing: border-box;
+    list-style-type: none;
+    text-decoration: none;
+    outline: none;
+    
+}
+html,
+body{
+    width: 100vw;
+    height: 100vh;
+    background-color: #65BCBF ;
+}
+header{
+    width: 100%;
+    height: 10vh;
+    padding: 2vh 2vw;
+    color: #ffff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+
+}
+header .screen-title{
+    margin-left:  44vw;
+    font-size: 1.1em;
+}
+header .buttons{
+  
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    
+   
+}
+.buttons :first-child{
+    margin-right: 1vw;
+}
+.toggle{
+    padding: 0 2vw;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+
+}
+ .period{
+
+    color: #ffff;
+    opacity: 0.7;
+    font-size: 0.78em;
+    line-height: 1em;
+    text-transform: uppercase;
+    padding: 1.5vh 0;
+}
+.period.active{
+    opacity: 1;
+    border-bottom: 1px solid #ffff;
+}
+.balance-info{
+    display: flex;
+    padding: 4vh 0;
+    justify-content: space-around;
+}
+.balance-info .circle{
+    width: 7.25rem;
+    height: 7.25rem;
+    border-radius: 50% ;
+    border: 5px solid #fff;
+}
+.results{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+}
+.results span{
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 0.75rem;
+    line-height: 0.875rem;
+}
+.results span + div{
+    font-size: 1.5rem;
+    color: #fff;
+    line-height: 1.75rem;
+}
+
+.entry-history{
+    padding: 0 1vw;
+    width: 100%;
+
+}
+.entry-history .list{
+    width: 100%;
+    height: 100%;
+    background-color: #ffff !important;
+    border-radius: 1em 1em 0 0 ;
+    
+}
+.entry{
+    padding: 3vh 3vw ;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.entry .value{
+    font-size: 1.375rem;
+    line-height: 1.650rem;
+}
+.entry.expense .value{
+    color: #F8777D;
+}
+.entry.income .value{
+    color: #65BCBF;
+}
+
+ .entry-description{
+    display: flex;
+    font-size: 1rem;
+    color: #232C2D;
+    opacity: 0.8;
+    line-height: 1.25rem;
+}
+ .entry-description :first-child{
+     margin-right: 1vw;
+ }
+ .entry-screen{
+     width: 100%;
+     height: 100%;
+     position: absolute;
+     top: 0;
+     left: 0;
+     background: #fff;
+     padding: 2vh 2vw;
+   
+     margin-left: -1000%;
+     transition: all 500ms;
+ }
+ .entry-screen .header{
+    display: flex;
+    justify-content: space-between;
+ }
+ .entry-screen .header a{
+    color: #65BCBF;
+    font-size: 1.1rem;
+ }
+ .entry-screen-title::after{
+     content: 'Expense';
+     color: #232C2D;
+     font-size: 1.1rem;
+ }
+ .entry-screen .main{
+     padding: 2vh 0;
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+ .toggle-btn{
+     width: 3.25rem;
+     height: 2rem;
+     background: #F8777D;
+     border-radius: 1.125rem;
+     display: flex;
+     padding: 0 0.2rem;
+     align-items: center;
+     justify-content: flex-start;
+ }
+ .inner-circle{
+     width: 1.625rem;
+     height: 1.625rem;
+     border-radius: 50%;
+     background: #fff;
+ }
+ .entry-input{
+     position: relative;
+     width: 60%;
+     padding: 1.5rem;
+ }
+ #entry{
+     width: 100%;
+     height: 3rem;
+     padding: 0.5rem 0;
+     font-size: 2.5rem;
+     letter-spacing: -5%;
+     outline: none;
+     color: #F8777D;
+ }
+.entry-input::after{
+     content: '$';
+     position: absolute;
+     color: #F8777D;
+     font-size: 2.5rem;
+     top:50%;
+     transform: translateY(-50%);
+     left: 0%;
+ }
+.entry-screen.income .entry-screen-title::after{
+    content: 'Income';
+}.entry-screen.income .toggle-btn{
+     background: #65BCBF ;
+     justify-content: flex-end;
+    
+ }
+ .entry-screen.income .entry-input::after{
+     color: #65BCBF;
+ }
+ .entry-screen.income #entry{
+     color: #65BCBF;
+ }
+ .settings span{
+     font-size: 0.875rem;
+     color: #232C2D;
+     opacity: 0.3;
+ }
+ .options{
+     margin-top: 1rem;
+ }
+ .settings .option{
+     display: flex;
+     justify-content: space-between;
+     font-size: 1rem;
+     line-height: 1.125rem;
+     color: #232C2D;
+     opacity: 0.7;
+ }
+ .option select{
+    font-size: 1rem;
+    line-height: 1.25rem;
+    letter-spacing: -0.02wm;
+    color: #65BCBF;
+    
+ }
+ 
