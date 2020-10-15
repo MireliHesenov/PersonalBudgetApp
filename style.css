@@ -80,6 +80,9 @@ main{
     padding: 4em 0;
     justify-content: space-around;
 }
+.balance-info .chart{
+    align-self: center;
+}
 .results{
     display: flex;
     flex-direction: column;

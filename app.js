@@ -32,11 +32,6 @@ let icons = {
 
 }
 
-// window.addEventListener('scroll',()=>{
-
-//     header.classList.toggle('sticky',window.scrollY > 100)
-// })
-
 addBtn.addEventListener('click',(e)=>{
     e.preventDefault()
     
@@ -99,7 +94,7 @@ doneBtn.addEventListener('click',(e)=>{
     
 })
 
-function updateUI(){
+function updateUI(ENTRY_LIST){
 
     let income =  calculateTotal('income',ENTRY_LIST);
     let outcome = calculateTotal('expense',ENTRY_LIST);
@@ -168,44 +163,44 @@ function setDate(){
 }
 
 function filterForYearly(){
-    let date = new Date()
-  ENTRY_LIST = ENTRY_LIST.filter(entry =>{
+  
+let List = ENTRY_LIST.filter(entry =>{
      return calcDateDif(entry) < 365
     })
 
     console.log(ENTRY_LIST)
-    updateUI()
+    updateUI(List)
 }
 
 function filterForMonthly(){
     
-  ENTRY_LIST = ENTRY_LIST.filter(entry =>{
+   let List = ENTRY_LIST.filter(entry =>{
      return calcDateDif(entry) < 30
     })
 
     console.log(ENTRY_LIST)
-    updateUI()
+    updateUI(List)
 }
 function filterForWeekly(){
 
     
-    ENTRY_LIST = ENTRY_LIST.filter(entry =>{
+   let List = ENTRY_LIST.filter(entry =>{
       
       return calcDateDif(entry) < 7
   
       })
-      updateUI()
+      updateUI(List)
 }
 function filterForDaily(){
 
     
-  ENTRY_LIST = ENTRY_LIST.filter(entry =>{
+  let List = ENTRY_LIST.filter(entry =>{
     
    return calcDateDif(entry) < 1
 
     })
 
-    updateUI()
+    updateUI(List)
 }
 function calcDateDif(entry){
     let perDay = 1000 * 60 * 60 * 24;
