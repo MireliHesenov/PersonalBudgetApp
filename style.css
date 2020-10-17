@@ -48,6 +48,7 @@ header.sticky{
 }
 main{
     max-height: 90vh !important;
+    overflow: hidden;
   
 }
 .toggle{
@@ -83,17 +84,23 @@ main{
 .balance-info .chart{
     align-self: center;
 }
+.balance{
+    display: flex;
+    flex-direction: column;
+    align-self: center ;
+}
 .results{
     display: flex;
     flex-direction: column;
     justify-content: space-around;
 }
-.results span{
+.balance-info span{
     color: rgba(255, 255, 255, 0.5);
     font-size: 0.75rem;
     line-height: 0.875rem;
+    text-transform: uppercase;
 }
-.results span + div{
+.balance-info span + div{
     font-size: 1.5rem;
     color: #fff;
     line-height: 1.75rem;
@@ -153,7 +160,7 @@ main{
      top: 0;
      left: 0;
      background: #EAEBED;;
-     padding: 2em 5%;
+     padding: 2.5em 5%;
    
      margin-left: -1000%;
      transition: all 700ms;
@@ -254,5 +261,66 @@ main{
 
     
  }
+ .entry-info{
+     position: absolute;
+     width: 100%;
+     height: 100%;
+     top: 0;
+     left: 0;
+     background: #EAEBED;;
+     padding: 2rem 5%;
+ }
+ .entry-info .header{
+     display: flex;
+     align-items: center;
+     justify-content: space-between;
+ }
+ .entry-info .header a{
+     color: #F8777D;
+     font-size: 1.2rem;
+ }
+ .entry-info .title{
+   color: #65BCBF;
+   font-size: 1.4rem;
+}
+.title :first-child{
+    margin-right: 1rem;
+}
+.entry-info .note{
+    font-size: 1.5rem;
+    margin-top: 1rem;
+    color: #232C2D;
+}
+.entry-info .date{
+    margin-top: 1rem;
+    display: inline-block;
+    color: #232C2D;
+    opacity: 0.5;
+}
+.entry-info .amount{
+    display: inline-block;
+    font-size: 2rem;
+    width: max-content;
+    float: right;
+}
+.amount.expense{
+    color: #F8777D;
+}
+.amount.income{
+    color: #65BCBF;
+}
 
- 
+ .info-message{
+     position: absolute;
+     top: 0;
+     left: 50%;
+     transform: translateX(-50%);
+    padding: 0.5rem;
+    font-size: 0.75rem;
+    margin-bottom: 0.5rem;
+    background: #2ec958;
+    color: #fff;
+ }
+ .info-message.error{
+    background: #F8777D;
+ }

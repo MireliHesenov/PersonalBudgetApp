@@ -1,5 +1,6 @@
 
 let header = document.querySelector('header')
+let totalBalnce = document.querySelector('.total-balance')
 let totalIncomes = document.querySelector('.total-incomes');
 let totalExpenses = document.querySelector('.total-expenses');
 let entryList = document.querySelector('.list');
@@ -12,7 +13,7 @@ let toggleBtn = document.querySelector('.toggle-btn');
 let dailyBtn = document.querySelector('#daily');
 let weeklyBtn = document.querySelector('#weekly');
 let monthlyBtn = document.querySelector('#monthly');
-let yearlyBtn = document.querySelector('#yearly');
+let allBtn = document.querySelector('#all');
 
 
 
@@ -39,26 +40,26 @@ addBtn.addEventListener('click',(e)=>{
 })
 dailyBtn.addEventListener('click',(e)=>{
     active(dailyBtn)
-    inactive([weeklyBtn,monthlyBtn,yearlyBtn]);
+    inactive([weeklyBtn,monthlyBtn,allBtn]);
     filterForDaily();
  
 })
 weeklyBtn.addEventListener('click',(e)=>{
     active(weeklyBtn)
-    inactive([dailyBtn,monthlyBtn,yearlyBtn]);
+    inactive([dailyBtn,monthlyBtn,allBtn]);
     filterForWeekly();
   
 })
 monthlyBtn.addEventListener('click',(e)=>{
     active(monthlyBtn)
-    inactive([dailyBtn,weeklyBtn,yearlyBtn]);
+    inactive([dailyBtn,weeklyBtn,allBtn]);
     filterForMonthly();
    
 })
-yearlyBtn.addEventListener('click',(e)=>{
-    active(yearlyBtn)
+allBtn.addEventListener('click',(e)=>{
+    active(allBtn)
     inactive([dailyBtn,weeklyBtn,monthly]);
-    filterForYearly();
+    updateUI()
     
 })
 
@@ -74,38 +75,48 @@ toggleBtn.addEventListener('click',()=>{
 
 doneBtn.addEventListener('click',(e)=>{
     e.preventDefault();
+    let randomID = Date.now()
     let category = document.querySelector('#category').value;
+    let note = document.querySelector('textarea').value
     let entryType = entryScreen.classList.contains('income') ?  'income' : 'expense' ;  
     setDate()
-    if(entryInput.value == '')return 
+    if(entryInput.value == ''){
+        infoMessage(message = 'Please , fill in the gap' , 'error')
+        return false        
+    }
     let entry = {
         type : entryType ,
+        id:randomID,
         value : parseInt(entryInput.value) ,
         category,
-        date : setDate()
+        date : setDate(),
+        note
+        
 
     }
     console.log(entry)
     ENTRY_LIST.push(entry)
     localStorage.setItem('entry_list',JSON.stringify(ENTRY_LIST));
     updateUI()
+    infoMessage(message = `New ${entryType} added` , 'succes')
 
     entryInput.value = ''
-    
+
 })
 
-function updateUI(ENTRY_LIST){
+function updateUI(list = ENTRY_LIST){
 
-    let income =  calculateTotal('income',ENTRY_LIST);
-    let outcome = calculateTotal('expense',ENTRY_LIST);
+    let income =  calculateTotal('income',list);
+    let outcome = calculateTotal('expense',list);
     let balance = Math.abs(income - outcome);
 
     let sign = (income > outcome ) ? '$' : '-$';
     clearElement(entryList)
     totalIncomes.innerText = `$${income}` ;
     totalExpenses.innerText = `-$${outcome}` ;
+    totalBalnce.innerText = `${sign}${balance}`
 
-    showEntry()
+    showEntry(list)
     updateChart(income,outcome)
 
     
@@ -124,13 +135,13 @@ function calculateTotal(type , list){
     return sum ;
 }
 
-function showEntry(){
-    ENTRY_LIST.forEach((entry,index) =>{
+function showEntry(list){
+    list.forEach((entry) =>{
     let sign = entry.type=='income' ? '$': '-$';
-
     let entryEl = document.createElement('li');
     entryEl.classList = `entry ${entry.type}`;
-    entryEl.setAttribute('id',index);
+    entryEl.setAttribute('id', entry.id);
+    entryEl.setAttribute('onclick' , `showEntryDetail(${entry.id})`)
     
     entryEl.innerHTML = ` 
                     <div class="entry-description">
@@ -141,7 +152,7 @@ function showEntry(){
                     </div>
                     <div class="value">${sign}${entry.value}</div>
                     `
-
+ 
     entryList.append(entryEl)
             })
 
@@ -158,18 +169,9 @@ function setDate(){
     let month = date.getMonth()
     let day = date.getDate()
     let hour = date.getHours()
+    let minute = date.getMinutes()
 
-    return {year,month,day,hour}
-}
-
-function filterForYearly(){
-  
-let List = ENTRY_LIST.filter(entry =>{
-     return calcDateDif(entry) < 365
-    })
-
-    console.log(ENTRY_LIST)
-    updateUI(List)
+    return {year,month,day,hour,minute}
 }
 
 function filterForMonthly(){
@@ -205,8 +207,8 @@ function filterForDaily(){
 function calcDateDif(entry){
     let perDay = 1000 * 60 * 60 * 24;
     let date = new Date()
-    let currenTime = Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours());
-    let entryDate = Date.UTC(entry.date.year , entry.date.month , entry.date.day , entry.date.hour);
+    let currenTime = Date.UTC(date.getFullYear(),date.getMonth(),date.getDate(),date.getHours(),date.getMinutes());
+    let entryDate = Date.UTC(entry.date.year , entry.date.month , entry.date.day , entry.date.hour, entry.date.minute);
     let diff = (currenTime - entryDate) / perDay ;
     console.log(diff)
     return diff
@@ -220,4 +222,49 @@ function inactive(elements){
     elements.forEach(element=>{
         element.classList.remove('active');
     })
+}
+function infoMessage(message , messageType){
+    const info = document.createElement('div');
+    info.classList = `info-message ${messageType}`;
+    info.innerText = `${message}`;
+    entryScreen.prepend(info)
+    setTimeout(() => {
+        document.querySelector('.info-message').remove()
+    }, 1000);
+
+}
+function showEntryDetail(id){
+    let entry = ENTRY_LIST.find(element =>  element.id == id)
+    let entryDate = `${entry.date.year}.${entry.date.month}.${entry.date.day}  ${entry.date.hour}:${entry.date.minute} `
+    const entryEl = document.createElement('div');
+    entryEl.classList.add('entry-info');
+    entryEl.innerHTML = `
+    <div class="header">
+    <a href="#" onclick="this.closest('.entry-info').remove()">Cancel</a>
+    <div class="title">
+    <i class="fas fa-${icons[entry.category]}"></i>
+    ${entry.category}
+    </div>
+    <a href="#" onclick="removeEntry(${entry.id})">Remove</a>
+    </div>
+    <div class='detail'>
+    <div class ='note'>
+    ${entry.note}
+    </div>
+    <div class="date">${entryDate}</div>
+    <div class='amount ${entry.type}'>
+    $${entry.value}
+    </div>
+    
+    `
+    document.querySelector('body').append(entryEl)
+    console.log(entryEl);
+    
+}
+
+function removeEntry(id){
+    var index = ENTRY_LIST.indexOf( ENTRY_LIST.find(element =>  element.id == id));
+    ENTRY_LIST.splice(index,1);
+    localStorage.setItem('entry_list',JSON.stringify(ENTRY_LIST))
+    updateUI()
 }

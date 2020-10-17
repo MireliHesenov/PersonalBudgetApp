@@ -31,12 +31,22 @@
         <div class="toggle">
             <div class="period" id="daily">Daily</div>
             <div class="period" id="weekly">Weekly</div>
-            <div class="period active" id="monthly">Monthly</div>
-            <div class="period" id="yearly">Yearly</div>
+            <div class="period " id="monthly">Monthly</div>
+            <div class="period active" id="all">All</div>
         </div>
         <div class="balance-info">
             <div class="chart"></div>
+
+            <div class="balance">
+                <span>Balance</span>
+                <div class="total-balance">
+                    123
+                </div>
+            </div>
+
             <div class="results">
+
+                
                 <div class="incomes">
                     <span>INCOMES</span>
                     <div class="total-incomes">
@@ -109,7 +119,7 @@
     <script src="app.js"></script>
 
     <script>
-        filterForMonthly()
+        updateUI()
     </script>
 </body>
 </html>
