@@ -86,7 +86,7 @@ main{
 }
 .balance-info{
     display: flex;
-    padding: 4em 0;
+    padding: 1em 0;
     justify-content: space-around;
 }
 .balance-info .chart{
