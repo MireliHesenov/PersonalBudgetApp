@@ -5,10 +5,12 @@ let totalIncomes = document.querySelector('.total-incomes');
 let totalExpenses = document.querySelector('.total-expenses');
 let entryList = document.querySelector('.list');
 
+let searchBtn = document.querySelector('#search-btn');
 let addBtn = document.querySelector('#add-btn');
 let cancelBtn = document.querySelector('#cancel-btn');
 let doneBtn = document.querySelector('#done-btn');
 let toggleBtn = document.querySelector('.toggle-btn');
+let searchInput = document.querySelector('.search-box > input');
 
 let dailyBtn = document.querySelector('#daily');
 let weeklyBtn = document.querySelector('#weekly');
@@ -19,6 +21,7 @@ let allBtn = document.querySelector('#all');
 
 let entryScreen = document.querySelector('.entry-screen');
 let entryInput = document.querySelector('#entry');
+
 
 ENTRY_LIST = JSON.parse(localStorage.getItem("entry_list")) || [];
 
@@ -38,6 +41,12 @@ addBtn.addEventListener('click',(e)=>{
     
     entryScreen.style.margin = '0'
 })
+// searchBtn.addEventListener('click',(e)=>{
+//     e.preventDefault()
+//     searchInput.style.visibility = 'visible';
+//     searchInput.style.width = '15em';
+//     document.querySelector('.screen-title').style.margin = '0';
+// })
 dailyBtn.addEventListener('click',(e)=>{
     active(dailyBtn)
     inactive([weeklyBtn,monthlyBtn,allBtn]);
@@ -75,13 +84,13 @@ toggleBtn.addEventListener('click',()=>{
 
 doneBtn.addEventListener('click',(e)=>{
     e.preventDefault();
-    let randomID = Date.now()
+    let randomID = Date.now();
     let category = document.querySelector('#category').value;
-    let note = document.querySelector('textarea').value
+    let note = document.querySelector('textarea');
     let entryType = entryScreen.classList.contains('income') ?  'income' : 'expense' ;  
     setDate()
-    if(entryInput.value == ''){
-        infoMessage(message = 'Please , fill in the gap' , 'error')
+    if(entryInput.value == '' || note.value == ''){
+        infoMessage(message = 'Please , fill in the gap' , 'error');
         return false        
     }
     let entry = {
@@ -90,19 +99,24 @@ doneBtn.addEventListener('click',(e)=>{
         value : parseInt(entryInput.value) ,
         category,
         date : setDate(),
-        note
+        note : note.value
         
 
     }
-    console.log(entry)
-    ENTRY_LIST.push(entry)
+    console.log(entry);
+    ENTRY_LIST.push(entry);
     localStorage.setItem('entry_list',JSON.stringify(ENTRY_LIST));
-    updateUI()
-    infoMessage(message = `New ${entryType} added` , 'succes')
-
-    entryInput.value = ''
+    updateUI();
+    infoMessage(message = `New ${entryType} added` , 'succes');
+    entryInput.value = '';
+    note.value = '';
 
 })
+// searchInput.addEventListener('keypress', function (e) {
+//     if (e.key === 'Enter') {
+//         let List = ENTRY_LIST.
+//     }
+// })
 
 function updateUI(list = ENTRY_LIST){
 
@@ -227,7 +241,7 @@ function infoMessage(message , messageType){
     const info = document.createElement('div');
     info.classList = `info-message ${messageType}`;
     info.innerText = `${message}`;
-    entryScreen.prepend(info)
+    document.body.prepend(info)
     setTimeout(() => {
         document.querySelector('.info-message').remove()
     }, 1000);
@@ -267,4 +281,6 @@ function removeEntry(id){
     ENTRY_LIST.splice(index,1);
     localStorage.setItem('entry_list',JSON.stringify(ENTRY_LIST))
     updateUI()
+    document.querySelector('.entry-info').remove()
+    infoMessage('Entry Removed !')
 }

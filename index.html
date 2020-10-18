@@ -2,8 +2,9 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
     <title>Budget App</title>
+    <link rel="shortcut icon" href="./Icon.png"  type="image/x-icon">
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.15.1/css/all.css" integrity="sha384-vp86vTRFVJgpjF9jiIGPEEqYqlDwgyBgEF109VFjmqGmIY/Y4HV4d3Gp2irVfcrp" crossorigin="anonymous">
 
@@ -12,20 +13,16 @@
 
     <header>
         <div class="screen-title">Cash</div>
-        <div class="buttons">
+         <!-- <div class="search-box">
+             <input type="text" name="" id="">
             <a href="" id="search-btn">
                 <svg width="19" height="19" viewBox="0 0 19 19" fill="none" xmlns="http://www.w3.org/2000/svg">
                     <path fill-rule="evenodd" clip-rule="evenodd" d="M12.0491 13.4633C10.7873 14.4274 9.21054 15 7.5 15C3.35786 15 0 11.6421 0 7.5C0 3.35786 3.35786 0 7.5 0C11.6421 0 15 3.35786 15 7.5C15 9.21053 14.4274 10.7873 13.4633 12.0491L17.7782 16.3639C18.1687 16.7545 18.1687 17.3876 17.7782 17.7781C17.3876 18.1687 16.7545 18.1687 16.364 17.7781L12.0491 13.4633ZM13 7.5C13 10.5376 10.5376 13 7.5 13C4.46243 13 2 10.5376 2 7.5C2 4.46243 4.46243 2 7.5 2C10.5376 2 13 4.46243 13 7.5Z" fill="white"/>
                     </svg>
                     
             </a>
-            <a href="" id="add-btn">
-                <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path d="M11 4C11 3.44772 11.4477 3 12 3C12.5523 3 13 3.44772 13 4V20C13 20.5523 12.5523 21 12 21C11.4477 21 11 20.5523 11 20V4Z" fill="white"/>
-                    <path d="M4 13C3.44772 13 3 12.5523 3 12C3 11.4477 3.44772 11 4 11H20C20.5523 11 21 11.4477 21 12C21 12.5523 20.5523 13 20 13H4Z" fill="white"/>
-                    </svg>    
-            </a>
-        </div>
+         </div> -->
+            
     </header>
     <main>
         <div class="toggle">
@@ -34,34 +31,40 @@
             <div class="period " id="monthly">Monthly</div>
             <div class="period active" id="all">All</div>
         </div>
-        <div class="balance-info">
-            <div class="chart"></div>
-
-            <div class="balance">
-                <span>Balance</span>
-                <div class="total-balance">
-                    123
-                </div>
-            </div>
-
-            <div class="results">
-
-                
-                <div class="incomes">
-                    <span>INCOMES</span>
-                    <div class="total-incomes">
-                        $9821.00
+        <div class="main-section">
+            <div class="balance-info">
+                <div class="chart"></div>
+    
+                <div class="balance">
+                    <span>Balance</span>
+                    <div class="total-balance">
+                        123
                     </div>
                 </div>
-                <div class="expenses">
-                    <span>EXPENSES</span>
-                    <div class="total-expenses">
-                        -$5320.80
+    
+                <div class="results">
+    
+                    
+                    <div class="incomes">
+                        <span>INCOMES</span>
+                        <div class="total-incomes">
+                            $9821.00
+                        </div>
+                    </div>
+                    <div class="expenses">
+                        <span>EXPENSES</span>
+                        <div class="total-expenses">
+                            -$5320.80
+                        </div>
                     </div>
                 </div>
             </div>
+            <a href="" id="add-btn">
+                Add New
+            </a>
         </div>
-
+     
+        
         <div class="entry-history">
             <ul class="list">
              
@@ -84,7 +87,7 @@
             </div>
 
             <div class="entry-input">
-                <input type="number" id="entry" autofocus>
+                <input type="number" id="entry" autofocus required>
             </div>
         </div>
         <div class="settings">
@@ -110,7 +113,7 @@
                 <div class="option">
                     Notes
 
-                    <textarea name="" id="" cols="30" rows="10"></textarea>
+                    <textarea name="" id="" cols="30" rows="10" required></textarea>
                 </div>
             </div>
         </div>

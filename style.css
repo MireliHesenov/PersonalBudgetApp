@@ -13,7 +13,7 @@ html,
 body{
     width: 100%;
     height: 100%;
-    background-color: #65BCBF ;
+    background: linear-gradient(90deg , #2082e9,#9900ff) ;
 }
 header{
     width: 100%;
@@ -29,22 +29,28 @@ header{
 header .screen-title{
     margin-left:  44%;
     font-size: 1.1em;
+    transition: all 300ms;
 }
-header .buttons{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    
-   
+.search-box{
+    width: min-content;
+    position: relative;
 }
-.buttons > :first-child{
-    margin-right: 2vw;
+.search-box input{
+    background-color: transparent;
+    border: 1px solid #ffffff;
+    padding: 0.5rem  2rem 0.5rem 0.5rem;
+    border-radius: 1rem;
+    color: #ffff;
+    width: 0 ;
+    visibility: hidden;
+    transition: all 300ms;
+
 }
-header.sticky{
-    position: sticky;
-    top: 0;
-    background: #fff;
-    color:#65BCBF
+.search-box a{
+    position: absolute;
+    top: 50%;
+    right: 3%;
+    transform: translateY(-50%);
 }
 main{
     max-height: 90vh !important;
@@ -75,8 +81,10 @@ main{
     opacity: 1;
     border-bottom: 1px solid #ffff;
 }
-.balance-info{
+.main-section{
     height: 32vh !important;
+}
+.balance-info{
     display: flex;
     padding: 4em 0;
     justify-content: space-around;
@@ -105,7 +113,20 @@ main{
     color: #fff;
     line-height: 1.75rem;
 }
-
+#add-btn{
+    display: block;
+    color: #fff;
+    padding: 1rem 0.5rem;
+    border: 1px solid #fff;
+    border-radius: 0.5rem;
+    width: 6.25rem;
+    height: 2.5rem;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin: 0 auto;
+   
+}
 .entry-history{
     padding: 0 2%;
     width: 100%;
@@ -320,6 +341,7 @@ main{
     margin-bottom: 0.5rem;
     background: #2ec958;
     color: #fff;
+    z-index: 1000;
  }
  .info-message.error{
     background: #F8777D;
